@@ -17,13 +17,18 @@ This repository contains the ROS package for 2D robot localization using the **A
 
 ## 🚀 How to Run
 
-1.  **Launch the Localization:**
+1.  **Prerequisites:**
+    * A working ROS1 installation.
+    * This package should be cloned into the `src` folder of your Catkin workspace.
+    * Your robot's driver nodes (for laser scanner and odometry) must be running and publishing to the correct topics.
+
+2.  **Launch the Localization:**
     Use `roslaunch` to start the AMCL localization node.
     ```bash
     roslaunch amcl_localization amcl_shato.launch
     ```
 
-2.  **Visualize in RViz:**
+3.  **Visualize in RViz:**
     * Open RViz: `rosrun rviz rviz`
     * Add the `Map`, `RobotModel`, and `PoseArray` (for AMCL particles) displays to visualize the robot's position and the filter's state.
 
