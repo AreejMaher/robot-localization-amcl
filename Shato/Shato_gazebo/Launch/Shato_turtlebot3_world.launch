@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!-- change only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/turtlebot3_world.world"/> 
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/> 
+    <arg name="recording" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+
+    <!-- Convert an xacro and put on parameter server -->
+    <param name="robot_description" command="$(find xacro)/xacro $(find miarobot_description)/urdf/model.urdf.xacro" />
+
+    <!-- <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link" args="0.0 0.0 0.0 0 0 0 10000 /base_footprint /base_link 10000"/> -->
+
+
+    <!-- <param name="publish_odom_tf" value="false"/>
+    <param name="publish_world_frame_tf" value="false" /> -->
+    <!-- <param name="slam_gmapping/publish_tf" value="false"/> -->
+
+    <!-- Spawn a robot into Gazebo -->
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output ="screen"
+     args="-param robot_description -urdf -model miarobot -x 2.0 -y 0.0 -z 0.0 -Y 0.0" />
+
+</launch>
